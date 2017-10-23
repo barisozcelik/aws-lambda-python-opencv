@@ -2,12 +2,12 @@
 
 # Setting up build env
 sudo yum update -y
-sudo yum install -y git cmake gcc-c++ gcc python-devel chrpath
+sudo yum install -y git cmake gcc-c++ gcc python36-devel chrpath
 mkdir -p lambda-package/cv2 build/numpy
 
 # Build numpy
-pip install --install-option="--prefix=$PWD/build/numpy" numpy
-cp -rf build/numpy/lib64/python2.7/site-packages/numpy lambda-package
+python36 -m pip install --install-option="--prefix=$PWD/build/numpy" numpy
+cp -rf build/numpy/lib64/python3.6/site-packages/numpy lambda-package
 
 # Build OpenCV 3.2
 (
