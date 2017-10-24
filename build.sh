@@ -13,9 +13,9 @@ cp -rf build/numpy/lib64/python2.7/site-packages/numpy lambda-package
 (
 	NUMPY=$PWD/lambda-package/numpy/core/include
 	cd build
-	git clone https://github.com/Itseez/opencv.git
-	cd opencv
-	git checkout 3.3.0
+	wget https://github.com/opencv/opencv/archive/3.3.0.zip
+	unzip opencv-3.3.0.zip
+	cd opencv-3.3.0
 	cmake										\
 		-D CMAKE_BUILD_TYPE=RELEASE				\
 		-D WITH_TBB=ON							\
@@ -34,8 +34,8 @@ cp -rf build/numpy/lib64/python2.7/site-packages/numpy lambda-package
 		.
 	make -j`cat /proc/cpuinfo | grep MHz | wc -l`
 )
-cp build/opencv/lib/cv2.so lambda-package/cv2/__init__.so
-cp -L build/opencv/lib/*.so.3.3 lambda-package/cv2
+cp build/opencv-3.3.0/lib/cv2.so lambda-package/cv2/__init__.so
+cp -L build/opencv-3.3.0/lib/*.so.3.3 lambda-package/cv2
 strip --strip-all lambda-package/cv2/*
 chrpath -r '$ORIGIN' lambda-package/cv2/__init__.so
 touch lambda-package/cv2/__init__.py
